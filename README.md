@@ -34,7 +34,7 @@
 ## 2. 진행과정
 ### 1. 시스템 아키텍처
 > OS : Windows 11  
-> Server : Tomcat 9   
+> Server : Tomcat 10   
 
 <img src="/image/시스템 아키텍처-006.png" />
 
