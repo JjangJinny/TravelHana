@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelhana.hanabank.hanabank.Model.HistoryMapper">
+    <select id="getTransactionList" parameterType="String" resultType="HistoryDto">
+        SELECT th.*
+        FROM transfer_history th
+                 JOIN meeting_account ma ON th.account_num = ma.account_num
+        WHERE ma.macnt_num = #{macntNum}
+          AND th.tran_date BETWEEN TO_DATE(#{fromDate}, 'YYYY/MM/DD') AND TO_DATE(#{toDate}, 'YYYY/MM/DD')
+        ORDER BY th.tran_date DESC
+    </select>
+
+    <select id="getAccount" parameterType="String" resultType="AccountDto">
+        SELECT * FROM hana_account WHERE account_num = #{account_num}
+    </select>
+
+    <select id="getMeetingAccount" parameterType="String" resultType="AccountDto">
+        SELECT h.account_num, h.account_balance FROM hana_account h JOIN meeting_account m ON h.account_num = m.account_num
+        WHERE m.macnt_num = #{account_num}
+    </select>
+
+    <update id="updateBalance">
+        UPDATE HANA_ACCOUNT
+        SET account_balance =
+                CASE
+                    WHEN #{tranType} = 'O' THEN account_balance - #{tranAmt}
+                    WHEN #{tranType} = 'I' THEN account_balance + #{tranAmt}
+                    ELSE account_balance
+                    END
+        WHERE account_num =
+              CASE
+                  WHEN SUBSTR(#{accountNum}, 1, 3) = '102' THEN (
+                      SELECT h.account_num
+                      FROM hana_account h
+                               JOIN meeting_account m
+                                    ON h.account_num = m.account_num
+                      WHERE m.macnt_num = TO_NUMBER(#{accountNum})
+                  )
+                  ELSE TO_NUMBER(#{accountNum})
+                  END
+    </update>
+
+    <insert id="insertTransferHistory" parameterType="HistoryDto">
+        INSERT INTO transfer_history(hstry_id, account_num, branch_name, tran_amt, balance_amt, tran_date, inout_type, account_seq)
+        VALUES ('HSTRY000' || SEQ_TRANSFER_HISTORY.NEXTVAL, #{account_num}, #{branch_name}, #{tran_amt}, #{balance_amt}, TO_DATE(#{tran_date}, 'yyyyMMddHH24miss'), #{inout_type}, #{account_seq})
+    </insert>
+</mapper>

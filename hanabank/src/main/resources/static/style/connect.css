@@ -1,0 +1,217 @@
+.container-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.connect-note {
+    width: 90%;
+    margin: 5%;
+    color: #a8a8a8;
+}
+
+#connect-card-form {
+    width: 90%;
+}
+
+.input-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 8% 0;
+}
+
+.input-container input {
+    width: 220px;
+    height: 50px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1px #c4c4c4;
+    border-radius: 8px;
+    font-family: "Hana-Regular", sans-serif;
+}
+
+#customer-id {
+    border: none;
+    border-bottom: solid 1px;
+    border-radius: 0;
+    text-align: end;
+}
+
+.authentication  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.authentication select, .authentication input {
+    width: 130px;
+    height: 40px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1px #c4c4c4;
+    border-radius: 8px;
+    font-family: "Hana-Regular", sans-serif;
+}
+
+#btn-connect-confirm {
+    width: 80px;
+    height: 40px;
+    margin-left: 10px;
+    background: #f4f8f9;
+    color: #008485;
+    border: none;
+    border-radius: 8px;
+    cursor:pointer;
+    font-family: "Hana-Regular", sans-serif;
+    transition: transform 0.1s ease;
+}
+
+#btn-connect-confirm:active {
+    transform: scale(0.95);
+}
+
+#btn-connect-confirm:disabled {
+    background: #c4c4c4;
+    color: white;
+}
+
+.authentication-api {
+    display: none;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#auth-num {
+    height: 40px;
+    border: none;
+    border-bottom: solid 1px;
+}
+
+#auth-check {
+    display: none;
+}
+
+#auth-btn {
+    background: white;
+    border: none;
+    color: #008485;
+    font-size: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+    font-family: "Hana-Regular", sans-serif;
+    transition: transform 0.1s ease;
+}
+
+#auth-btn:active {
+    transform: scale(0.9);
+}
+
+#card-container {
+    display: none;
+    border: solid 1px #a6a6a6;
+    border-radius: 15px;
+    padding: 0;
+}
+
+#card-container-title {
+    background-color: #f4f8f9;
+    font-family: "Hana-Regular", sans-serif;
+    text-align: left;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-items: flex-start;
+}
+
+#card-container-title tr {
+    margin-left: 20px;
+}
+
+#card-container tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    gap: 20px;
+}
+
+#card-container tbody td img {
+    width: 200px;
+    height: auto;
+}
+
+.card-container-name {
+    font-family: "Hana-Bold", sans-serif;
+}
+
+.btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#btn-cancel {
+    width: 120px;
+    height: 50px;
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f4f8f9;
+    border-radius: 4px;
+    border: none;
+    color: #008485;
+    font-size: 16px;
+    font-family: "Hana-Bold", sans-serif;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logincontainer form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5%;
+}
+
+.logincontainer form p {
+    width: 100%;
+    padding-left: 10%;
+    color: #FF374F;
+    font-weight: bold;
+}
+
+.logincontainer form input {
+    width: 400px;
+    height: 60px;
+    border-radius: 14px;
+    border: solid #c4c4c4;
+    padding: 7%;
+    margin: 1%;
+    font-size: 18px;
+}
+
+#btn-login-submit {
+    height: 50px;
+    padding: 0;
+    border: none;
+    background-color: #e5ebff;
+    color: #4d6fe6;
+    font-family: Hana-Bold, sans-serif;
+    cursor: pointer;
+}

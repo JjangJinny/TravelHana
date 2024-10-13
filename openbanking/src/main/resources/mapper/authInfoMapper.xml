@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelhana.openbanking.Model.AuthInfoMapper">
+    <select id="getFintechUseNum" parameterType="String" resultType="TokenDto">
+        SELECT access_token, fintech_use_num FROM user_auth_info WHERE user_seq_no = #{user_seq_no}
+    </select>
+
+    <insert id="insertToken" parameterType="TokenDto">
+        INSERT INTO USER_AUTH_INFO VALUES(#{user_seq_no}, #{access_token}, #{expires_in}, #{refresh_token}, #{scope}, #{fintech_use_num}, #{client_id}, SYSDATE, #{authorization_code})
+    </insert>
+
+    <update id="refreshToken" parameterType="TokenDto">
+        UPDATE user_auth_info SET access_token = #{access_token}, refresh_token = #{refresh_token} WHERE authorization_code = #{authorization_code}
+    </update>
+
+    <select id="getAuthorizationCode" parameterType="String" resultType="TokenDto">
+        SELECT * FROM user_auth_info WHERE refresh_token = #{refresh_token}
+    </select>
+</mapper>

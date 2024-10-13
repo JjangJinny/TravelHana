@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelhana.hanabank.hanabank.Model.MeetingMapper">
+    <insert id="insertMeeting" parameterType="MeetingDto">
+        INSERT INTO meeting_account VALUES(#{macnt_num}, #{account_num}, #{macnt_name}, 0, #{macnt_dues}, #{macnt_dues_date}, #{macnt_target_amount})
+    </insert>
+
+    <insert id="insertMeetingUser" parameterType="String">
+        INSERT INTO meeting_account_user VALUES(#{macntNum}, (SELECT consumer_ci FROM consumer WHERE fintech_use_num = #{fintechUseNum}), 'N')
+    </insert>
+
+    <select id="getMeetingAccount" parameterType="String" resultType="MeetingDto">
+        SELECT * FROM meeting_account WHERE macnt_num = #{macntNum}
+    </select>
+
+    <select id="getMeetingAccountList" parameterType="list" resultType="MeetingDto">
+        SELECT *
+        FROM meeting_account
+        WHERE macnt_num IN
+        <foreach item="macntNum" collection="list" open="(" separator="," close=")">
+            #{macntNum}
+        </foreach>
+    </select>
+
+    <insert id="insertAutoTransfer">
+        INSERT INTO auto_transfer VALUES('AT0000' || SEQ_AT_ID.NEXTVAL, #{atDate}, #{atAmount},  #{macntNum}, #{accountNum}, #{macntMsg}, #{accountMsg})
+    </insert>
+
+    <select id="getAutoTransfer" parameterType="String" resultType="AutoTransferDto">
+        SELECT * FROM auto_transfer WHERE macnt_num = #{macnt_num}
+    </select>
+
+    <select id="getMeetingMembers" parameterType="list" resultType="MeetingDto">
+        SELECT mau.macnt_num, mau.macnt_pay_status, SUBSTR(c.consumer_pnum, -4) AS consumer_pnum_back, c.consumer_name
+        FROM meeting_account_user mau JOIN consumer c
+            ON mau.consumer_ci = c.consumer_ci
+        WHERE mau.macnt_num IN
+        <foreach item="macntNum" collection="list" open="(" separator="," close=")">
+            #{macntNum}
+        </foreach>
+    </select>
+
+    <select id="getAccountInfo" parameterType="String" resultType="AccountDto">
+        SELECT holder_name, account_pw FROM hana_account WHERE account_num = #{account_num}
+    </select>
+
+    <select id="getMeetingAccountInfo" parameterType="String" resultType="AccountDto">
+        SELECT h.holder_name, h.account_pw
+        FROM hana_account h
+                 JOIN meeting_account m ON h.account_num = m.account_num
+        WHERE m.macnt_num = #{macnt_num}
+    </select>
+</mapper>

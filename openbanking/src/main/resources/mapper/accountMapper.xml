@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelhana.openbanking.Model.AccountMapper">
+    <insert id="insertAccountInfo" parameterType="String">
+        INSERT INTO account_info VALUES(#{account_num}, #{user_seq_no}, #{account_name})
+    </insert>
+
+    <select id="getAccountList" parameterType="String" resultType="MeetingDto">
+        SELECT account_num, account_name FROM account_info WHERE user_seq_no = #{user_seq_no} AND account_num LIKE '412%'
+    </select>
+
+    <select id="getMeetingAccountList" parameterType="String" resultType="String">
+        SELECT account_num FROM account_info WHERE user_seq_no = #{user_seq_no} AND account_num LIKE '102%'
+    </select>
+
+    <insert id="addMeetingMember" parameterType="String">
+        INSERT INTO account_info (account_num, user_seq_no, account_name)
+        SELECT #{account_num}, #{user_seq_no}, (SELECT account_name FROM account_info WHERE account_num = #{account_num} AND ROWNUM = 1)
+        FROM DUAL
+    </insert>
+
+    <select id="getTranLog" parameterType="String" resultType="String">
+        SELECT bank_tran_id FROM transfer_log WHERE bank_tran_id = #{bank_tran_id}
+    </select>
+</mapper>
