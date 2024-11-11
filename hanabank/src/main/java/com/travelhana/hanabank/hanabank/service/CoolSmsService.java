@@ -12,9 +12,9 @@ import java.util.Random;
 @Service
 @RequiredArgsConstructor
 public class CoolSmsService {
-    private String apiKey = "NCS2KYBD8HFXKAXU";
-    private String apiSecret = "0FSS6EB4LXHD80NTPIOMZNP14RRXRRWD";
-    private String fromPhoneNumber = "01072223869";
+    private String apiKey = API_KEY
+    private String apiSecret = API_SECRET
+    private String fromPhoneNumber = PHONE_NUM
     final DefaultMessageService defaultMessageService = NurigoApp.INSTANCE.initialize(apiKey, apiSecret, "https://api.coolsms.co.kr");
 
     public String sendSms(String to)  {
