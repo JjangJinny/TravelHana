@@ -64,7 +64,6 @@ public class AuthService {
     public RedirectView userAuth(ConsumerDto consumerDto) {
         insertConsumer(consumerDto);
         this.consumerCI = consumerDto.getConsumerCI();
-//        this.consumerCI = "fa42574597e7f3396d2a8be5b0e973d1874b46c8bcb7b7c56c137ffece67b8bc";
         String code = getRandomString();
 
         String redirectUrl = requestDto.getRedirectUri() + "?code=" + code + "&client_id=" + requestDto.getClientId() + "&scope=" + requestDto.getScope() + "&state=" + requestDto.getState();
