@@ -66,7 +66,6 @@
 
 [![Video Label](/image/메인이미지.png)](https://youtu.be/RSIuBQkPHkE)
 
-이미지 클릭시 링크로 연결됩니다.
 
 ---
 
