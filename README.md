@@ -63,7 +63,8 @@
 
 ### 4. 시연영상
 
-[![Video Label](/image/소비패턴분석-011.png)](https://youtu.be/RSIuBQkPHkE)
+[![Video Label](/image/메인 이미지.png)](https://youtu.be/RSIuBQkPHkE)
+이미지 클릭시 링크로 연결됩니다.
 
 ---
 
